@@ -1,0 +1,45 @@
+﻿namespace: langflow
+
+image:
+  repository: langflowai/langflow
+  tag: "1.2.0"
+  pullPolicy: Always
+
+replicaCount: 1
+
+serviceAccount:
+  create: true
+  name: langflow-sa
+  automount: false
+
+kubernetes:
+  enableServiceLinks: false
+
+resources:
+  requests:
+    cpu: 250m
+    memory: 512Mi
+  limits:
+    cpu: "1"
+    memory: 1Gi
+
+service:
+  name: langflow-svc
+  type: ClusterIP
+  port: 80
+  targetPort: 7860
+
+ingress:
+  enabled: true
+  className: nginx
+  host: "langflow.local"
+  path: "/"
+
+pdb:
+  enabled: true
+  minAvailable: 1
+  name: langflow-pdb
+
+database:
+  # NOTE: keep secrets out of GitHub; put password in a Secret in-cluster
+  url: "postgresql://langflow:ChangeMeStrong123!@langflow-postgres-postgresql.langflow.svc.cluster.local:5432/langflow"

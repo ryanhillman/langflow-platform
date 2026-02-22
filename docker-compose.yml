@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: langflow-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: langflow
+      POSTGRES_PASSWORD: langflow
+      POSTGRES_DB: langflow
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  langflow:
+    image: langflowai/langflow:latest
+    container_name: langflow-app
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://langflow:langflow@postgres:5432/langflow
+    ports:
+      - "7860:7860"
+
+volumes:
+  pgdata:

@@ -1,0 +1,46 @@
+﻿image:
+  repository: langflow-platform
+  tag: local
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 7860
+
+env:
+  LANGFLOW_HOST: "0.0.0.0"
+  LANGFLOW_PORT: "7860"
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+
+ingress:
+  enabled: false
+  className: ""
+  host: ""
+  path: /
+  tlsEnabled: false
+  tlsSecretName: ""
+
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 70
+
+postgres:
+  enabled: true
+  image: pgvector/pgvector:pg16
+  db: langflow
+  user: langflow
+  password: langflow
+  storage: 1Gi
+  servicePort: 5432

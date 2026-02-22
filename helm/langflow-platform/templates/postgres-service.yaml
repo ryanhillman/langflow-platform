@@ -1,0 +1,14 @@
+﻿{{- if .Values.postgres.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "langflow-platform.fullname" . }}-postgres
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ include "langflow-platform.name" . }}-postgres
+  ports:
+    - name: postgres
+      port: {{ .Values.postgres.servicePort }}
+      targetPort: 5432
+{{- end }}

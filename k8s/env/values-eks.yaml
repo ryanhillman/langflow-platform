@@ -1,0 +1,2 @@
+﻿ingress:
+  host: "langflow.<EKS_INGRESS_IP>.nip.io"

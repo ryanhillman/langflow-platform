@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: langflow
+  namespace: langflow
+spec:
+  replicas: 1
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+  selector:
+    matchLabels:
+      app: langflow
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: langflow
+    spec:
+      serviceAccountName: langflow-sa
+      automountServiceAccountToken: false
+      enableServiceLinks: false
+
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+
+      containers:
+      - name: langflow
+        image: langflowai/langflow:1.2.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 7860
+          protocol: TCP
+        env:
+        - name: LANGFLOW_DATABASE_URL
+          value: postgresql://langflow:ChangeMeStrong123!@langflow-postgres-postgresql.langflow.svc.cluster.local:5432/langflow
+        resources:
+          requests:
+            cpu: 250m
+            memory: 512Mi
+          limits:
+            cpu: "1"
+            memory: 1Gi
+        startupProbe:
+          tcpSocket:
+            port: 7860
+          periodSeconds: 5
+          failureThreshold: 30
+          timeoutSeconds: 1
+        readinessProbe:
+          tcpSocket:
+            port: 7860
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+          timeoutSeconds: 1
+        livenessProbe:
+          tcpSocket:
+            port: 7860
+          initialDelaySeconds: 30
+          periodSeconds: 20
+          failureThreshold: 3
+          timeoutSeconds: 1

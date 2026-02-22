@@ -1,0 +1,12 @@
+﻿{{- if .Values.postgres.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "langflow-platform.fullname" . }}-pgdata
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.postgres.storage | quote }}
+{{- end }}

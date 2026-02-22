@@ -1,0 +1,2 @@
+﻿ingress:
+  host: "langflow.<GKE_INGRESS_IP>.nip.io"

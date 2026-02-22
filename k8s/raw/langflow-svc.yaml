@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: langflow-svc
+  namespace: langflow
+spec:
+  selector:
+    app: langflow
+  ports:
+  - port: 80
+    targetPort: 7860
+  type: ClusterIP

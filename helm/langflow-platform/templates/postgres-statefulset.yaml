@@ -1,0 +1,43 @@
+﻿{{- if .Values.postgres.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "langflow-platform.fullname" . }}-postgres
+spec:
+  serviceName: {{ include "langflow-platform.fullname" . }}-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ include "langflow-platform.name" . }}-postgres
+  template:
+    metadata:
+      labels:
+        app: {{ include "langflow-platform.name" . }}-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: {{ .Values.postgres.image | quote }}
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - secretRef:
+                name: {{ include "langflow-platform.fullname" . }}-postgres
+          volumeMounts:
+            - name: pgdata
+              mountPath: /var/lib/postgresql/data
+          resources:
+            requests:
+              cpu: 100m
+              memory: 256Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+  volumeClaimTemplates:
+    - metadata:
+        name: pgdata
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.postgres.storage | quote }}
+{{- end }}

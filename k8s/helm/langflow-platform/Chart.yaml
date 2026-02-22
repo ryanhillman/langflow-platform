@@ -1,0 +1,6 @@
+﻿apiVersion: v2
+name: langflow-platform
+description: Portable Langflow deployment (AKS/EKS/GKE)
+type: application
+version: 0.1.0
+appVersion: "1.2.0"

@@ -1,0 +1,34 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: langflow
+      POSTGRES_PASSWORD: langflow
+      POSTGRES_DB: langflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U langflow -d langflow"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  langflow:
+    build:
+      context: ../app
+      dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      LANGFLOW_HOST: 0.0.0.0
+      LANGFLOW_PORT: 7860
+      DATABASE_URL: postgresql://langflow:langflow@postgres:5432/langflow
+    ports:
+      - "7860:7860"
+    restart: unless-stopped
+
+volumes:
+  pgdata:

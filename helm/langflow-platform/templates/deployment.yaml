@@ -1,0 +1,39 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "langflow-platform.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "langflow-platform.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "langflow-platform.name" . }}
+    spec:
+      containers:
+        - name: langflow
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+
+          ports:
+            - containerPort: 7860
+
+          env:
+            - name: LANGFLOW_HOST
+              value: {{ .Values.env.LANGFLOW_HOST | quote }}
+
+            - name: LANGFLOW_PORT
+              value: {{ .Values.env.LANGFLOW_PORT | quote }}
+
+            - name: DATABASE_URL
+              value: postgresql://{{ .Values.postgres.user }}:{{ .Values.postgres.password }}@{{ include "langflow-platform.fullname" . }}-postgres:5432/{{ .Values.postgres.db }}
+
+          resources:
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
