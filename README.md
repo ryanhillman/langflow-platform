@@ -36,6 +36,12 @@ Database isolated from public internet
 
 Environment-based secret management
 
+## Kubernetes Support
+
+A `/k8s` directory contains Kubernetes manifests prepared for deploying this stack to managed clusters (AKS, EKS, or GKE).
+
+The current live demo runs via Docker Compose on a VM for simplicity, but the architecture is containerized and portable to Kubernetes environments.
+
 ## AI-Assisted Development (Claude Code)
 
 Claude Code was used during this project to:
