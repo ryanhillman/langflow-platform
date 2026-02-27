@@ -6,7 +6,9 @@
 
 # Langflow Platform — Azure Deployment Demo
 
-Live deployed Langflow stack running on an Azure Linux VM using Docker Compose and Caddy reverse proxy.
+Production-style deployment of Langflow with persistent storage, reverse proxy, and cloud networking controls on Microsoft Azure.
+
+This project demonstrates containerized AI platform deployment using Docker Compose and is architected for portability to Kubernetes (AKS, EKS, GKE).
 
 ## Live Demo
 
@@ -30,16 +32,11 @@ flowchart TD
 
 ## Deployment Summary
 
--Dockerized Langflow + Postgres
-
+-Dockerized Langflow + PostgreSQL
 -Deployed to Azure Linux VM
-
 -Public IP configured as Static
-
 -Reverse proxy via Caddy
-
 -Database isolated from public internet
-
 -Environment-based secret management
 
 ## Kubernetes
@@ -51,25 +48,17 @@ The current live demo runs via Docker Compose on a VM for simplicity, but the ar
 ## AI-Assisted Development (Claude Code)
 
 Claude Code was used during this project to:
-
 -Refactor and validate docker-compose.yml configuration
-
 -Troubleshoot Docker and VM deployment issues
-
 -Generate infrastructure setup steps (Azure VM + Caddy reverse proxy)
-
 -Draft architecture documentation and deployment instructions
 
 ## Skills Demonstrated
 
 -Docker orchestration
-
+-Reverse proxy configuration (Caddy)
 -Cloud VM provisioning (Azure)
-
--Reverse proxy configuration
-
--Network security (NSG rules)
-
--Production-style app + database separation
-
--Public AI tool deployment
+-Static IP and NSG configuration
+-Container networking
+-Secure app + database separation
+-AI platform deployment
