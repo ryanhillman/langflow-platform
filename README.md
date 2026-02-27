@@ -1,92 +1,148 @@
-# Langflow Platform
+Langflow Platform — Azure Deployment Demo
 
-A self-hosted [Langflow](https://github.com/langflow-ai/langflow) deployment backed by PostgreSQL with pgvector, packaged for local Docker Compose and AKS (Helm).
+A containerized Langflow stack deployed to a public Azure VM using Docker Compose and a Caddy reverse proxy.
 
----
+This project demonstrates practical cloud deployment skills including containerization, reverse proxy configuration, secure database isolation, and live public hosting.
 
-## Quick Start
+🚀 Live Demo
 
-```bash
+http://20.121.40.238/
+
+Azure VM with Static Public IP
+Reverse proxied via Caddy (Port 80 → 127.0.0.1:7860)
+
+
+```mermaid
+flowchart TD
+    User["User Browser"]
+    Caddy["Caddy Reverse Proxy\nPort 80"]
+    Langflow["Langflow Container\nPort 7860"]
+    Postgres["Postgres + pgvector\nDocker Volume (pgdata)"]
+    Azure["Azure Linux VM\nStatic Public IP"]
+
+    User -->|HTTP 80| Azure
+    Azure --> Caddy
+    Caddy -->|Reverse Proxy| Langflow
+    Langflow -->|Internal Docker Network| Postgres
+
+```
+
+Key Design Decisions
+
+Postgres is NOT publicly exposed (no 5432 inbound rule).
+
+Application port 7860 is not used directly by users.
+
+Reverse proxy handles public traffic.
+
+Secrets injected via .env (not committed).
+
+Public IP configured as Static in Azure.
+
+🖥 Local Development
+Prerequisites
+
+Docker Desktop
+
+Git
+
+Run Locally
 docker compose up -d
-```
+docker compose ps
 
-Open <http://localhost:7860> in your browser.
+Open:
 
----
+http://localhost:7860
+Stop
+docker compose down
 
-## Troubleshooting
+⚠️ Do NOT use docker compose down -v unless you want to delete the Postgres volume.
 
-### Docker Desktop pipe error (`//./pipe/dockerDesktopLinuxEngine`)
+☁ Azure Deployment Summary
 
-**Symptom**
+High-level deployment steps used:
 
-```
-error during connect: Get "http://%2F%2F.%2Fpipe%2FdockerDesktopLinuxEngine/...":
-open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified.
-```
+Create Azure Linux VM (Ubuntu)
 
-**Fix**
+Allow inbound ports:
 
-1. Open **Docker Desktop** and wait until the whale icon in the system tray shows *"Docker Desktop is running"*.
-2. If Docker Desktop is already open but the engine is stopped, go to **Settings → General** and click **Start**.
-3. If the issue persists, restart the Docker Desktop service:
-   ```powershell
-   Restart-Service -Name "com.docker.service" -Force
-   ```
-4. Re-run `docker compose up -d`.
+22 (SSH)
 
----
+80 (HTTP)
 
-### Port checks
+Install Docker + Docker Compose plugin
 
-Before starting the stack, confirm the required ports are free.
+Clone repository onto VM
 
-**Langflow (7860)**
+Create runtime .env file (not committed)
 
-```bash
-# Linux / macOS
-lsof -i :7860
+Start containers:
 
-# Windows (PowerShell)
-netstat -ano | findstr :7860
-```
+docker compose up -d
 
-**PostgreSQL (5432)**
+Install and configure Caddy reverse proxy:
 
-```bash
-# Linux / macOS
-lsof -i :5432
+:80 {
+    reverse_proxy 127.0.0.1:7860
+}
 
-# Windows (PowerShell)
-netstat -ano | findstr :5432
-```
+Restart Caddy:
 
-If a port is in use, either stop the conflicting process or change the host-side port mapping in `docker-compose.yml`:
+sudo systemctl restart caddy
+🔐 Environment Variables (Example)
 
-```yaml
-ports:
-  - "7861:7860"   # map host 7861 → container 7860
-```
+.env file (never committed):
 
----
+LANGFLOW_DATABASE_URL=postgresql://langflow:langflow@postgres:5432/langflow
+LANGFLOW_HOST=0.0.0.0
+LANGFLOW_PORT=7860
 
-### Viewing logs
+AZURE_OPENAI_ENDPOINT=https://<your-resource>.openai.azure.com/
+AZURE_OPENAI_API_KEY=<your-key>
+AZURE_OPENAI_DEPLOYMENT=<deployment-name>
+AZURE_OPENAI_API_VERSION=2024-02-15-preview
 
-**All services (follow mode)**
+Secrets are managed outside version control.
 
-```bash
-docker compose logs -f
-```
+🧠 Skills Demonstrated
 
-**Single service**
+Docker container orchestration
 
-```bash
-docker compose logs -f langflow
-docker compose logs -f postgres
-```
+Reverse proxy configuration (Caddy)
 
-**Last N lines only**
+Cloud VM provisioning (Azure)
 
-```bash
-docker compose logs --tail=100 langflow
-```
+Network security via NSG rules
+
+Database isolation from public internet
+
+Static IP configuration
+
+Environment-based secret management
+
+Deploying AI tooling to cloud infrastructure
+
+🛠 Operational Commands
+
+Check containers:
+
+docker compose ps
+
+View logs:
+
+docker compose logs --tail 200 langflow
+
+Restart services:
+
+docker compose restart
+🎯 Portfolio Objective
+
+This project showcases:
+
+End-to-end deployment from local container development to public cloud hosting
+
+Clean separation of proxy / application / database layers
+
+Reproducible infrastructure pattern suitable for multi-cloud expansion
+
+Practical AI platform deployment with secure architecture decisions
