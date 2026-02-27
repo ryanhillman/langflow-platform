@@ -36,6 +36,18 @@ Database isolated from public internet
 
 Environment-based secret management
 
+## AI-Assisted Development (Claude Code)
+
+Claude Code was used during this project to:
+
+Refactor and validate docker-compose.yml configuration
+
+Troubleshoot Docker and VM deployment issues
+
+Generate infrastructure setup steps (Azure VM + Caddy reverse proxy)
+
+Draft architecture documentation and deployment instructions
+
 ## Skills Demonstrated
 
 Docker orchestration
