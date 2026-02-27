@@ -1,8 +1,8 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Langflow-Workflow%20Builder-7C3AED?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Azure-Deployed-blue?style=for-the-badge&logo=microsoft-azure" />
-  <img src="https://img.shields.io/badge/Claude-Code%20Assisted-000000?style=flat-square&logo=anthropic&logoColor=white" />
-</p>
+  <img src="https://img.shields.io/badge/Claude-AI%20Assisted-000000?style=for-the-badge&logo=anthropic&logoColor=white" />
+</p></p>
 
 # Langflow Platform — Azure Deployment Demo
 
