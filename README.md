@@ -1,10 +1,10 @@
-Langflow Platform — Azure Deployment Demo
+# Langflow Platform — Azure Deployment Demo
 
 A containerized Langflow stack deployed to a public Azure VM using Docker Compose and a Caddy reverse proxy.
 
 This project demonstrates practical cloud deployment skills including containerization, reverse proxy configuration, secure database isolation, and live public hosting.
 
-🚀 Live Demo
+## Live Demo
 
 http://20.121.40.238/
 
@@ -27,7 +27,7 @@ flowchart TD
 
 ```
 
-Key Design Decisions
+## Key Design Decisions
 
 Postgres is NOT publicly exposed (no 5432 inbound rule).
 
@@ -39,7 +39,7 @@ Secrets injected via .env (not committed).
 
 Public IP configured as Static in Azure.
 
-🖥 Local Development
+## Local Development
 Prerequisites
 
 Docker Desktop
@@ -56,9 +56,9 @@ http://localhost:7860
 Stop
 docker compose down
 
-⚠️ Do NOT use docker compose down -v unless you want to delete the Postgres volume.
+Do NOT use docker compose down -v unless you want to delete the Postgres volume.
 
-☁ Azure Deployment Summary
+## Azure Deployment Summary
 
 High-level deployment steps used:
 
@@ -89,7 +89,8 @@ Install and configure Caddy reverse proxy:
 Restart Caddy:
 
 sudo systemctl restart caddy
-🔐 Environment Variables (Example)
+
+## Environment Variables (Example)
 
 .env file (never committed):
 
@@ -104,7 +105,7 @@ AZURE_OPENAI_API_VERSION=2024-02-15-preview
 
 Secrets are managed outside version control.
 
-🧠 Skills Demonstrated
+## Skills Demonstrated
 
 Docker container orchestration
 
@@ -122,7 +123,7 @@ Environment-based secret management
 
 Deploying AI tooling to cloud infrastructure
 
-🛠 Operational Commands
+## Operational Commands
 
 Check containers:
 
@@ -135,7 +136,8 @@ docker compose logs --tail 200 langflow
 Restart services:
 
 docker compose restart
-🎯 Portfolio Objective
+
+## Portfolio Objective
 
 This project showcases:
 
