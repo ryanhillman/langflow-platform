@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="https://img.shields.io/badge/Cloud-Azure-blue?style=for-the-badge&logo=microsoft-azure" />
+  <img src="https://img.shields.io/badge/Container-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/Database-Postgres-336791?style=for-the-badge&logo=postgresql&logoColor=white" />
+</p>
+
 # Langflow Platform — Azure Deployment Demo
 
 Live deployed Langflow stack running on an Azure Linux VM using Docker Compose and Caddy reverse proxy.
