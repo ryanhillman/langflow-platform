@@ -33,10 +33,15 @@ flowchart TD
 ## Deployment Summary
 
 -Dockerized Langflow + PostgreSQL
+
 -Deployed to Azure Linux VM
+
 -Public IP configured as Static
+
 -Reverse proxy via Caddy
+
 -Database isolated from public internet
+
 -Environment-based secret management
 
 ## Kubernetes
@@ -48,17 +53,27 @@ The current live demo runs via Docker Compose on a VM for simplicity, but the ar
 ## AI-Assisted Development (Claude Code)
 
 Claude Code was used during this project to:
+
 -Refactor and validate docker-compose.yml configuration
+
 -Troubleshoot Docker and VM deployment issues
+
 -Generate infrastructure setup steps (Azure VM + Caddy reverse proxy)
+
 -Draft architecture documentation and deployment instructions
 
 ## Skills Demonstrated
 
 -Docker orchestration
+
 -Reverse proxy configuration (Caddy)
+
 -Cloud VM provisioning (Azure)
+
 -Static IP and NSG configuration
+
 -Container networking
+
 -Secure app + database separation
+
 -AI platform deployment
