@@ -24,17 +24,17 @@ flowchart TD
 
 ## Deployment Summary
 
-Dockerized Langflow + Postgres
+-Dockerized Langflow + Postgres
 
-Deployed to Azure Linux VM
+-Deployed to Azure Linux VM
 
-Public IP configured as Static
+-Public IP configured as Static
 
-Reverse proxy via Caddy
+-Reverse proxy via Caddy
 
-Database isolated from public internet
+-Database isolated from public internet
 
-Environment-based secret management
+-Environment-based secret management
 
 ## Kubernetes
 
@@ -56,14 +56,14 @@ Draft architecture documentation and deployment instructions
 
 ## Skills Demonstrated
 
-Docker orchestration
+-Docker orchestration
 
-Cloud VM provisioning (Azure)
+-Cloud VM provisioning (Azure)
 
-Reverse proxy configuration
+-Reverse proxy configuration
 
-Network security (NSG rules)
+-Network security (NSG rules)
 
-Production-style app + database separation
+-Production-style app + database separation
 
-Public AI tool deployment
+-Public AI tool deployment
