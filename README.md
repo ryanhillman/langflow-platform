@@ -46,13 +46,13 @@ The current live demo runs via Docker Compose on a VM for simplicity, but the ar
 
 Claude Code was used during this project to:
 
-Refactor and validate docker-compose.yml configuration
+-Refactor and validate docker-compose.yml configuration
 
-Troubleshoot Docker and VM deployment issues
+-Troubleshoot Docker and VM deployment issues
 
-Generate infrastructure setup steps (Azure VM + Caddy reverse proxy)
+-Generate infrastructure setup steps (Azure VM + Caddy reverse proxy)
 
-Draft architecture documentation and deployment instructions
+-Draft architecture documentation and deployment instructions
 
 ## Skills Demonstrated
 
