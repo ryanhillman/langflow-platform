@@ -36,7 +36,7 @@ Database isolated from public internet
 
 Environment-based secret management
 
-## Kubernetes Support
+## Kubernetes
 
 A `/k8s` directory contains Kubernetes manifests prepared for deploying this stack to managed clusters (AKS, EKS, or GKE).
 
