@@ -25,7 +25,7 @@ services:
     environment:
       LANGFLOW_HOST: 0.0.0.0
       LANGFLOW_PORT: 7860
-      DATABASE_URL: postgresql://langflow:langflow@postgres:5432/langflow
+      LANGFLOW_DATABASE_URL: postgresql://langflow:langflow@postgres:5432/langflow
     ports:
       - "7860:7860"
     restart: unless-stopped
