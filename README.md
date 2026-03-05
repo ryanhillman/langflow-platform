@@ -1,10 +1,10 @@
+# Langflow Platform — Azure Deployment Demo
+
 <p align="center">
   <img src="https://img.shields.io/badge/Langflow-Workflow%20Builder-7C3AED?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Azure-Deployed-blue?style=for-the-badge&logo=microsoft-azure" />
   <img src="https://img.shields.io/badge/Claude-AI%20Assisted-000000?style=for-the-badge&logo=anthropic&logoColor=white" />
 </p></p>
-
-# Langflow Platform — Azure Deployment Demo
 
 Production-style deployment of Langflow with persistent storage, reverse proxy, and cloud networking controls on Microsoft Azure.
 
